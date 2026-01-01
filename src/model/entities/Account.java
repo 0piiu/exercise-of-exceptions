@@ -8,14 +8,13 @@ public class Account {
 	private String holder;
 	private Double balance;
 	private Double withDrawLimit;
-	
-	
+
 	public Account() {
-		
+
 	}
 
 	public Account(Integer numberAccount, String holder, Double balance, Double withDrawLimit) {
-	
+
 		this.numberAccount = numberAccount;
 		this.holder = holder;
 		this.balance = balance;
@@ -34,32 +33,33 @@ public class Account {
 		return balance;
 	}
 
-
 	public Double getWithDrawLimit() {
 		return withDrawLimit;
-	}	
-	
+	}
+
 	public void deposit(double amount) {
 		this.balance += amount;
 	}
-	
-	public void withdraw(double amount) {
+
+	private void validate(double amount) {
 		if (amount > withDrawLimit) {
-			throw new DomainException("Error, the withdrawal amount must be less than the available withdrawal limit. ");
+			throw new DomainException(
+					"Error, the withdrawal amount must be less than the available withdrawal limit. ");
 		}
-		if(balance < amount ) { // 
+		if (balance < amount) { //
 			throw new DomainException("error, insufficient balance");
-		}else {
-			balance -= amount;
 		}
+
 	}
-	
+
+	public void withdraw(double amount) {
+		validate(amount);
+		balance -= amount;
+
+	}
+
 	@Override
 	public String toString() {
-		return holder
-				+ ", "
-				+ numberAccount
-				+", "
-				+ String.format("%.2f", getBalance());
+		return holder + ", " + numberAccount + ", " + String.format("%.2f", getBalance());
 	}
 }

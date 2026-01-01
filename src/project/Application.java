@@ -12,7 +12,7 @@ public class Application {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 			
-			try {
+			
 				System.out.println("Enter account data: ");
 				
 				System.out.print("Number: ");
@@ -36,7 +36,8 @@ public class Application {
 				
 				System.out.print("Enter amount for withdraw: ");
 				double amount = sc.nextDouble();
-				
+			try {
+					
 				account.withdraw(amount);
 				
 				System.out.println(account.toString());
